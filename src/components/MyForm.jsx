@@ -1,10 +1,9 @@
-
+import { Container, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import MyResult from './MyResult';
 import { useNavigate } from 'react-router-dom';
+import MySpinner from './MySpinner';
+
 
 // export default function MyForm() 
 const MyForm = () => {
@@ -69,20 +68,18 @@ const MyForm = () => {
   console.log(city)
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <>
+      <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <Form.Label>City</Form.Label>
         <Form.Control type="search" placeholder="Rome" value={query} onChange={handleQuery}/>
       </Form.Group>
-      {/* ok ma con il refresh si rompre */}
-      {/* {!city && <p>Gatto: {city.lat}</p>} */}
-      {/* <p>Gatto: {city.lat}</p> */}
-      {city.map((x,index)=> ( <p onClick={()=>{navigate("/Result/" + x.lat +"/"+ x.lon)}} key={index}>{x.name} {x.country}</p> ) )}
-      
-      {/* <Button variant="primary" type="submit" onChange={handleChange}>
-      Submit
-    </Button> */}
     </Form>
+      {/* ok ma con il refresh si rompre */}
+      <Container>
+              {city.map((x,index)=> ( <Row style={{cursor: "pointer", padding: "10px"}} onClick={()=>{navigate("/Result/" + x.lat +"/"+ x.lon + "/" + x.name + "/" + x.country)}} key={index}>{x.name} {x.country}</Row> ) )}
+      </Container>
+    </>
     );
 }
 
